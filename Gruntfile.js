@@ -2,7 +2,12 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     concat: {
+      js: {
+        src: 'public/client/*.js',
+        dest: 'public/dist/concat.js'
+      }
     },
 
     gitpush: {
@@ -30,11 +35,17 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      'my_target': {
+        files: {
+          'public/dist/app.combined.min.js': ['public/dist/concat.js']
+        }
+      }
     },
 
     eslint: {
       target: [
         // Add list of files to lint here
+        'public/client/*.js'
       ]
     },
 
@@ -87,6 +98,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'eslint', 'concat', 'uglify'
   ]);
 
   grunt.registerTask('upload', function(n) {
