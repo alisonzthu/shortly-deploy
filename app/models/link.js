@@ -1,5 +1,6 @@
 var db = require('../config');
 var crypto = require('crypto');
+var mongoose = require('../../db/mangoose');
 
 var Link = db.Model.extend({
   tableName: 'urls',
@@ -15,5 +16,7 @@ var Link = db.Model.extend({
     });
   }
 });
+
+// var saveLink = function
 
 module.exports = Link;
